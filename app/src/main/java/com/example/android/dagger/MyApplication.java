@@ -7,5 +7,5 @@ import com.example.android.dagger.user.UserManager;
 
 public class MyApplication extends Application {
 
-    public final UserManager userManager = new UserManager(new  SharedPreferencesStorage(this));;
+    public final UserManager userManager = new UserManager(new SharedPreferencesStorage(this));;
 }
