@@ -12,6 +12,10 @@ public class UserDataRepository {
         this.unreadNotifications = randomInt();
     }
 
+    public int getUnreadNotifications() {
+        return unreadNotifications;
+    }
+
     public String getUsername() {
         return userManager.getUsername();
     }

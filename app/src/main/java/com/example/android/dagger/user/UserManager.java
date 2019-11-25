@@ -27,6 +27,10 @@ public class UserManager {
         return !storage.getString(REGISTERED_USER).isEmpty();
     }
 
+    public UserDataRepository getUserDataRepository() {
+        return userDataRepository;
+    }
+
     public void registerUser(String username, String password) {
         storage.setString(REGISTERED_USER, username);
         storage.setString(username + PASSWORD_SUFFIX, password);
