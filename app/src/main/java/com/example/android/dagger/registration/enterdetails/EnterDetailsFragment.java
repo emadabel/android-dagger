@@ -106,38 +106,11 @@ public class EnterDetailsFragment extends Fragment {
         });
     }
 
-    /*enum EnterDetailsViewState {
-        EnterDetailsSuccess,
-        EnterDetailsError {
-            private String error;
-
-            public void setError(String error) {
-                this.error = error;
-            }
-
-            public String getError() {
-                return error;
-            }
-        };
-
-        private String error;
-
-        EnterDetailsViewState() {}
-
-        public void setError(String error) {
-            EnterDetailsError.error = error;
-        }
-    }*/
-
     static class EnterDetailsSuccess extends EnterDetailsViewState {
     }
 
     static class EnterDetailsError extends EnterDetailsViewState {
         private final String error;
-
-//        public final String getError() {
-//            return this.error;
-//        }
 
         EnterDetailsError(String error) {
             this.error = error;
