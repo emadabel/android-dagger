@@ -34,7 +34,7 @@ class RegistrationActivity : AppCompatActivity() {
     lateinit var registrationViewModel: RegistrationViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        registrationComponent = (application as MyApplication).appComonent.registrationComponent().create()
+        registrationComponent = (application as MyApplication).appComponent.registrationComponent().create()
         registrationComponent.inject(this)
 
         super.onCreate(savedInstanceState)

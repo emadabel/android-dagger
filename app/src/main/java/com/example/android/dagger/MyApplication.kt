@@ -22,7 +22,11 @@ import com.example.android.dagger.di.DaggerAppComponent
 
 open class MyApplication : Application() {
 
-    val appComonent: AppComponent by lazy {
-        DaggerAppComponent.factory().create(applicationContext)
+    val appComponent: AppComponent by lazy {
+        initializeComponent()
+    }
+
+    open fun initializeComponent(): AppComponent {
+        return DaggerAppComponent.factory().create(applicationContext)
     }
 }
