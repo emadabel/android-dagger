@@ -16,15 +16,22 @@ import com.example.android.dagger.registration.RegistrationActivity;
 import com.example.android.dagger.settings.SettingsActivity;
 import com.example.android.dagger.user.UserManager;
 
+import javax.inject.Inject;
+
 public class MainActivity extends AppCompatActivity {
 
-    private MainViewModel mainViewModel;
+    @Inject
+    UserManager userManager;
+
+    @Inject
+    MainViewModel mainViewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        ((MyApplication) getApplication()).appComponent.inject(this);
+
         super.onCreate(savedInstanceState);
 
-        UserManager userManager = ((MyApplication) getApplication()).userManager;
         if (!userManager.isUserLoggedIn()) {
             if (!userManager.isUserRegistered()) {
                 startActivity(new Intent(MainActivity.this, RegistrationActivity.class));
@@ -36,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
         } else {
             setContentView(R.layout.activity_main);
 
-            mainViewModel = new MainViewModel(userManager.getUserDataRepository());
             setupViews();
         }
     }

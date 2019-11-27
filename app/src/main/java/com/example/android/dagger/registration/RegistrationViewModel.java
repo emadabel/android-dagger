@@ -4,12 +4,19 @@ import androidx.annotation.NonNull;
 
 import com.example.android.dagger.user.UserManager;
 
+import javax.inject.Inject;
+
 public class RegistrationViewModel {
 
+    private final UserManager userManager;
     private String username;
     private String password;
     private Boolean acceptedTCs;
-    private final UserManager userManager;
+
+    @Inject
+    public RegistrationViewModel(@NonNull UserManager userManager) {
+        this.userManager = userManager;
+    }
 
     public void updateUserData(@NonNull String username, @NonNull String password) {
         this.username = username;
@@ -24,9 +31,5 @@ public class RegistrationViewModel {
         if (username == null || password == null || !acceptedTCs) return;
 
         userManager.registerUser(username, password);
-    }
-
-    public RegistrationViewModel(@NonNull UserManager userManager) {
-        this.userManager = userManager;
     }
 }

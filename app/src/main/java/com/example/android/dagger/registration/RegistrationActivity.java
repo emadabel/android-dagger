@@ -12,9 +12,12 @@ import com.example.android.dagger.main.MainActivity;
 import com.example.android.dagger.registration.enterdetails.EnterDetailsFragment;
 import com.example.android.dagger.registration.termsandconditions.TermsAndConditionsFragment;
 
+import javax.inject.Inject;
+
 public class RegistrationActivity extends AppCompatActivity {
 
-    private RegistrationViewModel registrationViewModel;
+    @Inject
+    RegistrationViewModel registrationViewModel;
 
     public RegistrationViewModel getRegistrationViewModel() {
         return registrationViewModel;
@@ -22,10 +25,11 @@ public class RegistrationActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        ((MyApplication) getApplication()).appComponent.inject(this);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        registrationViewModel = new RegistrationViewModel(((MyApplication) getApplication()).userManager);
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_holder, new EnterDetailsFragment())
                 .commit();

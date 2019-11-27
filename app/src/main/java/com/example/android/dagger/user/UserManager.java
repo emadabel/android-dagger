@@ -2,6 +2,10 @@ package com.example.android.dagger.user;
 
 import com.example.android.dagger.storage.Storage;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+@Singleton
 public class UserManager {
 
     private final static String REGISTERED_USER = "registered_user";
@@ -11,6 +15,7 @@ public class UserManager {
     private UserDataRepository userDataRepository = null;
 
 
+    @Inject
     public UserManager(Storage storage) {
         this.storage = storage;
     }
