@@ -13,18 +13,21 @@ import com.example.android.dagger.R;
 import com.example.android.dagger.login.LoginActivity;
 import com.example.android.dagger.user.UserManager;
 
+import javax.inject.Inject;
+
 public class SettingsActivity extends AppCompatActivity {
 
-    private SettingsViewModel settingsViewModel;
+    @Inject
+    SettingsViewModel settingsViewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        UserManager userManager = ((MyApplication) getApplication()).appComponent.userManager();
+        userManager.getUserComponent().inject(this);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        UserManager userManager = ((MyApplication) getApplication()).userManager;
-
-        settingsViewModel = new SettingsViewModel(userManager.getUserDataRepository(),userManager);
         setupViews();
     }
 

@@ -12,28 +12,29 @@ public class UserManager {
     private final static String PASSWORD_SUFFIX = "password";
 
     private final Storage storage;
-    private UserDataRepository userDataRepository = null;
-
+    private UserComponent.Factory userComponentFactory;
+    private UserComponent userComponent = null;
 
     @Inject
-    public UserManager(Storage storage) {
+    public UserManager(Storage storage, UserComponent.Factory userComponentFactory) {
         this.storage = storage;
+        this.userComponentFactory = userComponentFactory;
     }
 
     public String getUsername() {
         return storage.getString(REGISTERED_USER);
     }
 
+    public UserComponent getUserComponent() {
+        return userComponent;
+    }
+
     public boolean isUserLoggedIn() {
-        return userDataRepository != null;
+        return userComponent != null;
     }
 
     public boolean isUserRegistered() {
         return !storage.getString(REGISTERED_USER).isEmpty();
-    }
-
-    public UserDataRepository getUserDataRepository() {
-        return userDataRepository;
     }
 
     public void registerUser(String username, String password) {
@@ -54,7 +55,7 @@ public class UserManager {
     }
 
     public void logout() {
-        userDataRepository = null;
+        userComponent = null;
     }
 
     public void unregister() {
@@ -65,6 +66,6 @@ public class UserManager {
     }
 
     private void userJustLoggedIn() {
-        userDataRepository = new UserDataRepository(this);
+        userComponent = userComponentFactory.create();
     }
 }

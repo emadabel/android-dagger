@@ -3,8 +3,8 @@ package com.example.android.dagger.di;
 import android.content.Context;
 
 import com.example.android.dagger.login.LoginComponent;
-import com.example.android.dagger.main.MainActivity;
 import com.example.android.dagger.registration.RegistrationComponent;
+import com.example.android.dagger.user.UserManager;
 
 import javax.inject.Singleton;
 
@@ -23,5 +23,5 @@ public interface AppComponent {
     RegistrationComponent.Factory registrationComponent();
     LoginComponent.Factory loginComponent();
 
-    void inject(MainActivity activity);
+    UserManager userManager();
 }

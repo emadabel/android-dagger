@@ -4,6 +4,7 @@ import java.util.Random;
 
 import javax.inject.Inject;
 
+@LoggedUserScope
 public class UserDataRepository {
 
     private final UserManager userManager;

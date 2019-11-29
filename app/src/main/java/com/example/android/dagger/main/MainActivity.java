@@ -21,17 +21,13 @@ import javax.inject.Inject;
 public class MainActivity extends AppCompatActivity {
 
     @Inject
-    UserManager userManager;
-
-    @Inject
     MainViewModel mainViewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        ((MyApplication) getApplication()).appComponent.inject(this);
-
         super.onCreate(savedInstanceState);
 
+        UserManager userManager = ((MyApplication) getApplication()).appComponent.userManager();
         if (!userManager.isUserLoggedIn()) {
             if (!userManager.isUserRegistered()) {
                 startActivity(new Intent(MainActivity.this, RegistrationActivity.class));
@@ -43,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             setContentView(R.layout.activity_main);
 
+            userManager.getUserComponent().inject(this);
             setupViews();
         }
     }
