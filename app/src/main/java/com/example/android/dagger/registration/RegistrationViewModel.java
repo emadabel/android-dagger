@@ -2,10 +2,12 @@ package com.example.android.dagger.registration;
 
 import androidx.annotation.NonNull;
 
+import com.example.android.dagger.di.ActivityScope;
 import com.example.android.dagger.user.UserManager;
 
 import javax.inject.Inject;
 
+@ActivityScope
 public class RegistrationViewModel {
 
     private final UserManager userManager;

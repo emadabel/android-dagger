@@ -16,16 +16,15 @@ import javax.inject.Inject;
 
 public class RegistrationActivity extends AppCompatActivity {
 
+    public RegistrationComponent registrationComponent;
+
     @Inject
     RegistrationViewModel registrationViewModel;
 
-    public RegistrationViewModel getRegistrationViewModel() {
-        return registrationViewModel;
-    }
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        ((MyApplication) getApplication()).appComponent.inject(this);
+        registrationComponent = ((MyApplication) getApplication()).appComponent.registrationComponent().create();
+        registrationComponent.inject(this);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);

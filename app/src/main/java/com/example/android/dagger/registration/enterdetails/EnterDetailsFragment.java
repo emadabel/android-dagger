@@ -1,5 +1,6 @@
 package com.example.android.dagger.registration.enterdetails;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,23 +20,32 @@ import com.example.android.dagger.R;
 import com.example.android.dagger.registration.RegistrationActivity;
 import com.example.android.dagger.registration.RegistrationViewModel;
 
+import javax.inject.Inject;
+
 public class EnterDetailsFragment extends Fragment {
 
-    private RegistrationViewModel registrationViewModel;
-    private EnterDetailsViewModel enterDetailsViewModel;
+    @Inject
+    RegistrationViewModel registrationViewModel;
+
+    @Inject
+    EnterDetailsViewModel enterDetailsViewModel;
 
     private TextView errorTextView;
     private EditText usernameEditText;
     private EditText passwordEditText;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        ((RegistrationActivity) getActivity()).registrationComponent.inject(this);
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_enter_details, container, false);
 
-        registrationViewModel = ((RegistrationActivity) getActivity()).getRegistrationViewModel();
-
-        enterDetailsViewModel = new EnterDetailsViewModel();
         enterDetailsViewModel.getEnterDetailsState().observe(EnterDetailsFragment.this, new Observer<EnterDetailsViewState>() {
             @Override
             public void onChanged(EnterDetailsViewState state) {

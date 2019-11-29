@@ -6,6 +6,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.android.dagger.user.UserManager;
 
+import javax.inject.Inject;
+
 import static com.example.android.dagger.login.LoginActivity.LoginViewState.LoginError;
 import static com.example.android.dagger.login.LoginActivity.LoginViewState.LoginSuccess;
 
@@ -14,6 +16,7 @@ public class LoginViewModel {
     private final MutableLiveData<LoginActivity.LoginViewState> _loginState;
     private final UserManager userManager;
 
+    @Inject
     public LoginViewModel(@NonNull UserManager userManager) {
         this.userManager = userManager;
         this._loginState = new MutableLiveData<>();

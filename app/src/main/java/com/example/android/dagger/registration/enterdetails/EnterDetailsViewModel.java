@@ -4,10 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import javax.inject.Inject;
+
 public class EnterDetailsViewModel {
     private static final int MAX_LENGTH = 5;
 
     private final MutableLiveData<EnterDetailsViewState> _enterDetailsState = new MutableLiveData<>();
+
+    @Inject
+    public EnterDetailsViewModel() {
+    }
 
     public final LiveData<EnterDetailsViewState> getEnterDetailsState() {
         return this._enterDetailsState;

@@ -18,16 +18,21 @@ import com.example.android.dagger.R;
 import com.example.android.dagger.main.MainActivity;
 import com.example.android.dagger.registration.RegistrationActivity;
 
+import javax.inject.Inject;
+
 public class LoginActivity extends AppCompatActivity {
-    private LoginViewModel loginViewModel;
+
+    @Inject
+    LoginViewModel loginViewModel;
     private TextView errorTextView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        ((MyApplication) getApplication()).appComponent.loginComponent().create().inject(this);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        loginViewModel = new LoginViewModel(((MyApplication) getApplication()).userManager);
         loginViewModel.getLoginState().observe(LoginActivity.this, new Observer<LoginViewState>() {
             @Override
             public void onChanged(LoginViewState state) {
